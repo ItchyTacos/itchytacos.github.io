@@ -5,4 +5,5 @@ app = Flask(__name__)
 
 @app.route("/")
 def get():
-    return "<h1>fart</h1>"
+    with open("index.html") as file:
+        return file
