@@ -1,14 +1,21 @@
 from flask import Flask, request, render_template
 from markupsafe import escape
+from werkzeug.security import check_password_hash
 
 app = Flask(__name__)
 
 @app.route("/")
 def index():
-    argname = request.args.get("name", "Flask")
-    return render_template("index.html", name = argname)
+    return render_template("index.html")
     
 
 @app.route("/login")
 def login():
-    return render_template("error.html")
+    ADMIN_KEY = "fortnite"
+    username = request.args.get("username", "Flask")
+    password = request.args.get("password", "")
+    if check_password_hash(ADMIN_KEY, password):
+
+        return render_template("error.html",username = escape(username))
+    else:
+        return render_template("error.html")
