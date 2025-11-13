@@ -43,3 +43,4 @@ def errorroute(e):
 def test():
     password = str(request.args.get("password"))
     return str(check_password_hash(ADMIN_KEY,password))
+
